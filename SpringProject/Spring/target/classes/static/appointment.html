@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Appointment Booking</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Book an Appointment</h2>
+    <form id="appointmentForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="date">Appointment Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="time">Appointment Time:</label>
+        <input type="time" id="time" name="time" required>
+
+        <label for="service">Service:</label>
+        <select id="service" name="service">
+            <option value="consultation">Consultation</option>
+            <option value="checkup">Checkup</option>
+            <option value="therapy">Therapy</option>
+        </select>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to handle the form submission and send data to the backend
+    const form = document.getElementById("appointmentForm");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+        // Create the appointment object from form data
+        const appointment = {
+            clientName: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            date: document.getElementById("date").value,
+            time: document.getElementById("time").value,
+            serviceType: document.getElementById("service").value
+        };
+
+        // Send the appointment data to the backend using fetch API
+        fetch('http://localhost:8080/appointments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(appointment)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle successful response
+            alert("Appointment booked successfully!");
+        })
+        .catch(error => {
+            // Handle any errors
+            alert("Error booking appointment: " + error);
+        });
+    });
+</script>
+
+</body>
+</html>

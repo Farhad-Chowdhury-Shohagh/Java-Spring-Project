@@ -1,0 +1,6 @@
+2025-05-16 15:23:53.406040+06:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "APPOINTMENTS" not found (this database is empty); SQL statement:
+select a1_0.id,a1_0.client_name,a1_0.end_time,a1_0.notes,a1_0.service_type,a1_0.start_time from appointments a1_0 where (a1_0.start_time<? and a1_0.end_time>?) [42104-224]
+2025-05-16 15:27:54.489472+06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]selecet* from appointments"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selecet* from appointments [42001-224]
